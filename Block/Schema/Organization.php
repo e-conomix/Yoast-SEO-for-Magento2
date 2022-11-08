@@ -93,6 +93,11 @@ class Organization extends Template
         $sameAs = $this->getStoreInformation(
             'general/store_information/schema_sameas'
         );
+
+        if (!$sameAs) {
+            return [];
+        }
+
         $sameAs = str_replace("\n", "", $sameAs);
         $sameAs = explode("\r", $sameAs);
 
