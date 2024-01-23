@@ -118,4 +118,8 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter">
+        <plugin name="use_default_set" type="MaxServ\YoastSeo\Plugin\Product\Initialization\Helper\AttributeFilter" sortOrder="1" disabled="false" />
+    </type>
 </config>
