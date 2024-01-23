@@ -48,8 +48,6 @@ class AttributeFilter
             $useDefaults['meta_title'] = $productData['meta_title'] ? '0' : '1';
         }
 
-        $aDebug = $useDefaults['meta_title'];
-
         return [$product, $productData, $useDefaults];
     }
 }
