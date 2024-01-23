@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="yoast_changed_values">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">yoast_changed_values</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="dataScope" xsi:type="string">data.yoast_changed_values</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="visible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="yoast_changed_meta_title" formElement="checkbox">
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="boolean">false</map>
+                            <map name="true" xsi:type="boolean">true</map>
+                        </valueMap>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

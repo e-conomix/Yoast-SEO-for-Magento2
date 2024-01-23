@@ -116,6 +116,16 @@ define([
             ], function (ignore, field) {
                 field.subscribe(this.scheduleRefresh.bind(this));
             }.bind(this));
+
+            const META_TITLE_INPUT = $(this.previewElement).find('.js-snippet-editor-title');
+            META_TITLE_INPUT[0].yoastData = {originalValue: META_TITLE_INPUT.val()};
+            META_TITLE_INPUT.blur(function () {
+                const CHANGED = this.yoastData.originalValue !== $(this).val();
+                $('input[name="yoast_changed_values[yoast_changed_meta_title]"]')
+                    .prop('checked', CHANGED)
+                    .val(CHANGED ? 'true' : 'false')
+                    .change();
+            });
         },
         scheduleRefresh: function () {
             if (this.refreshTimer) {
