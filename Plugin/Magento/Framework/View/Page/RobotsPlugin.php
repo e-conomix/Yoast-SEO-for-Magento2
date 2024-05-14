@@ -1,6 +1,6 @@
 <?php
 
-namespace  MaxServ\YoastSeo\Plugin\Magento\Framework\View\Page;
+namespace MaxServ\YoastSeo\Plugin\Magento\Framework\View\Page;
 
 use Magento\Framework\App\Area;
 use Magento\Framework\App\State;
