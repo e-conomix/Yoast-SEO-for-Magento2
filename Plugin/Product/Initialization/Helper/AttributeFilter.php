@@ -27,9 +27,12 @@ class AttributeFilter
      */
     public function beforePrepareProductAttributes(Subject $subject, Product $product, array $productData, array $useDefaults)
     {
-        $useDefaults['meta_title'] = (string) $useDefaults['meta_title'] == '1'
-            ? (string) ($productData['meta_title'] != $productData['name'])
-            : (string) !$productData['meta_title'];
+        if(isset($useDefaults['meta_title'])){
+            $useDefaults['meta_title'] = (string) $useDefaults['meta_title'] == '1'
+                ? (string) ($productData['meta_title'] != $productData['name'])
+                : (string) !$productData['meta_title'];
+
+        }
 
         return [$product, $productData, $useDefaults];
     }
