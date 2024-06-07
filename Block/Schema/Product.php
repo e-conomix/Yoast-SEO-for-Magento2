@@ -167,6 +167,11 @@ class Product extends AbstractProduct
         $stockItem = $this->stockRegistry->getStockItem(
             $this->getProduct()->getId()
         );
+        if (!$currencyBlock) {
+            $currency = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
+        } else {
+            $currency = $currencyBlock->getCurrentCurrencyCode();
+        }
         if ($stockItem->getIsInStock()) {
             $availability = 'http://schema.org/InStock';
         } else {
@@ -179,7 +184,7 @@ class Product extends AbstractProduct
                 (float)$this->getProduct()->getFinalPrice(),
                 2
             ),
-            'priceCurrency' => $currencyBlock->getCurrentCurrencyCode()
+            'priceCurrency' => $currency
         ];
 
         return $offer;

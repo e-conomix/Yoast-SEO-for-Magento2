@@ -9,6 +9,7 @@ namespace MaxServ\YoastSeo\Plugin\Product\Initialization\Helper;
 
 use Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter as Subject;
 use Magento\Catalog\Model\Product;
+use Magento\Framework\App\Request\Http as Request;
 
 /**
  * Class AttributeFilter
@@ -17,6 +18,19 @@ use Magento\Catalog\Model\Product;
  */
 class AttributeFilter
 {
+    protected Request $request;
+
+    /**
+     * AttributeFilter constructor
+     *
+     * @param Request $request
+     */
+    public function __construct(
+        Request $request
+    ) {
+        $this->request = $request;
+    }
+
     /**
      * @param Subject $subject
      * @param Product $product
@@ -27,9 +41,12 @@ class AttributeFilter
      */
     public function beforePrepareProductAttributes(Subject $subject, Product $product, array $productData, array $useDefaults)
     {
-        $useDefaults['meta_title'] = (string) $useDefaults['meta_title'] == '1'
-            ? (string) ($productData['meta_title'] != $productData['name'])
-            : (string) !$productData['meta_title'];
+        $changedValues = $this->request->getPost('yoast_changed_values', []);
+        $changedTitle = isset($changedValues['yoast_changed_meta_title']) && $changedValues['yoast_changed_meta_title'] === 'true';
+
+        if ($changedTitle) {
+            $useDefaults['meta_title'] = $productData['meta_title'] ? '0' : '1';
+        }
 
         return [$product, $productData, $useDefaults];
     }

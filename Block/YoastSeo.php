@@ -53,18 +53,18 @@ class YoastSeo extends Template
             '_current' => true,
             '_use_rewrite' => true
         ]);
-        
+
         $parameterStrip = $this->_scopeConfig->getValue(
             'yoastseo/general/strip_parameters_from_canonical',
             ScopeInterface::SCOPE_STORES
         );
-        
+
         if ($canonical
             && $parameterStrip == true
             && strstr(substr($canonical, strrpos($canonical, '/')), '?') !== false) {
             $canonical = substr($canonical, 0, strrpos($canonical, '/'));
         }
-        
+
         if ($canonical
             && substr($canonical, -5) !== '.html'
             && substr($canonical, -1) !== '/') {
@@ -137,7 +137,7 @@ class YoastSeo extends Template
         $twitterSite = $this->_scopeConfig->getValue(
             'yoastseo/twitter/company_account',
             ScopeInterface::SCOPE_STORES
-        );
+        ) ?? "";
         if (substr($twitterSite, 0, 1) !== '@') {
             $twitterSite = '@' . $twitterSite;
         }
@@ -156,7 +156,7 @@ class YoastSeo extends Template
         $twitterUser = $this->_scopeConfig->getValue(
             'yoastseo/twitter/manager_account',
             ScopeInterface::SCOPE_STORE
-        );
+        ) ?? "";
         if (substr($twitterUser, 0, 1) !== '@') {
             $twitterUser = '@' . $twitterUser;
         }
