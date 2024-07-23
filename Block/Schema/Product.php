@@ -177,12 +177,15 @@ class Product extends AbstractProduct
         } else {
             $availability = 'http://schema.org/OutOfStock';
         }
+        // force english notation without thousands separator
         $offer = [
             '@type' => 'Offer',
             'availability' => $availability,
             'price' => (string)number_format(
                 (float)$this->getProduct()->getFinalPrice(),
-                2
+                2,
+                '.',
+                ''
             ),
             'priceCurrency' => $currency
         ];
