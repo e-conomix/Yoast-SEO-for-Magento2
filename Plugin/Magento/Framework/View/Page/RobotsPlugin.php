@@ -19,7 +19,7 @@ class RobotsPlugin
      */
     public function __construct(
         State $state,
-        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Registry $registry
     ) {
         $this->state = $state;
         $this->registry = $registry;
