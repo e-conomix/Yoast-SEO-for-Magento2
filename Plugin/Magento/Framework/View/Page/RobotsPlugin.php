@@ -40,7 +40,7 @@ class RobotsPlugin
         }
 
         $product = $this->registry->registry('product');
-        if($product){
+        if($product && $product->getData('yoast_robots_instructions')) {
             return $product->getData('yoast_robots_instructions');
         }
         return $result;
