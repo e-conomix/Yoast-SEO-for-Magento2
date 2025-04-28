@@ -100,7 +100,7 @@ class Collection extends TemplateCollection implements SearchResultInterface
      * @param SearchCriteriaInterface $searchCriteria
      * @return $this
      */
-    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
