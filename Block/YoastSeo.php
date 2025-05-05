@@ -60,15 +60,19 @@ class YoastSeo extends Template
             ScopeInterface::SCOPE_STORES
         );
 
-        if ($canonical
+        if (
+            $canonical
             && $parameterStrip == true
-            && strstr(substr($canonical, strrpos($canonical, '/')), '?') !== false) {
+            && strstr(substr($canonical, strrpos($canonical, '/')), '?') !== false
+        ) {
             $canonical = substr($canonical, 0, strrpos($canonical, '/'));
         }
 
-        if ($canonical
+        if (
+            $canonical
             && substr($canonical, -5) !== '.html'
-            && substr($canonical, -1) !== '/') {
+            && substr($canonical, -1) !== '/'
+        ) {
             $canonical .= '/';
         }
 
@@ -140,18 +144,11 @@ class YoastSeo extends Template
      */
     public function getTwitterSite()
     {
-        $twitterSite = $this->_scopeConfig->getValue(
+        return $this->getTwitterValue($this->_scopeConfig->getValue(
             'yoastseo/twitter/company_account',
             ScopeInterface::SCOPE_STORES
-        ) ?? "";
-        if (substr($twitterSite, 0, 1) !== '@') {
-            $twitterSite = '@' . $twitterSite;
-        }
-        if ($twitterSite === '@') {
-            $twitterSite = '';
-        }
-
-        return $twitterSite;
+        )
+        );
     }
 
     /**
@@ -159,17 +156,25 @@ class YoastSeo extends Template
      */
     public function getTwitterCreator()
     {
-        $twitterUser = $this->_scopeConfig->getValue(
+        return $this->getTwitterValue($this->_scopeConfig->getValue(
             'yoastseo/twitter/manager_account',
             ScopeInterface::SCOPE_STORE
-        ) ?? "";
-        if (substr($twitterUser, 0, 1) !== '@') {
-            $twitterUser = '@' . $twitterUser;
+        )
+        );
+    }
+
+    private function getTwitterValue($value)
+    {
+        if (\is_null($value)) {
+            $value = "";
         }
-        if ($twitterUser === '@') {
-            $twitterUser = '';
+        if (\substr($value, 0, 1) !== '@') {
+            $value = '@' . $value;
+        }
+        if ($value === '@') {
+            $value = '';
         }
 
-        return $twitterUser;
+        return $value;
     }
 }

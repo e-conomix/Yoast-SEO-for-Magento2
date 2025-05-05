@@ -48,8 +48,8 @@ class Collection extends TemplateCollection implements SearchResultInterface
         $eventObject,
         $resourceModel,
         $model = Document::class,
-        AdapterInterface $connection = null,
-        AbstractDb $resource = null
+        ?AdapterInterface $connection = null,
+        ?AbstractDb $resource = null
     ) {
         parent::__construct(
             $entityFactory,
@@ -100,7 +100,7 @@ class Collection extends TemplateCollection implements SearchResultInterface
      * @param SearchCriteriaInterface $searchCriteria
      * @return $this
      */
-    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
@@ -132,7 +132,7 @@ class Collection extends TemplateCollection implements SearchResultInterface
      * @param \Magento\Framework\Api\ExtensibleDataInterface[] $items
      * @return $this
      */
-    public function setItems(array $items = null)
+    public function setItems(?array $items = null)
     {
         return $this;
     }

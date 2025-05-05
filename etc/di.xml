@@ -122,4 +122,8 @@
     <type name="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter">
         <plugin name="use_default_set" type="MaxServ\YoastSeo\Plugin\Product\Initialization\Helper\AttributeFilter" sortOrder="1" disabled="false" />
     </type>
+    <type name="Magento\Framework\View\Page\Config">
+        <plugin name="yoastseo_config_robots" type="MaxServ\YoastSeo\Plugin\Magento\Framework\View\Page\RobotsPlugin"/>
+    </type>
+    
 </config>

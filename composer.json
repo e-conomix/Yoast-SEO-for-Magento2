@@ -1,6 +1,7 @@
 {
   "name": "e-conomix/magento-module-yoastseo",
   "description": "Yoast SEO integration by MaxServ",
+  "version": "2.0.7",
   "require": {
     "magento/framework": "^101.0|^102.0|^103.0",
     "magento/module-catalog": "*",
