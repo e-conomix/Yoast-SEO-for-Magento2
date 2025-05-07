@@ -21,6 +21,7 @@ class YoastSeo extends Template
      * @param array $data
      */
     public function __construct(
+        protected \Magento\Cms\Model\Page $page,
         Context $context,
         EntityConfigurationPool $entityConfigurationPool,
         array $data = []
@@ -73,6 +74,11 @@ class YoastSeo extends Template
             && substr($canonical, -1) !== '/'
         ) {
             $canonical .= '/';
+        }
+
+        $identifier = ($this->page->getIdentifier() ?? trim($this->_request->getOriginalPathInfo(), '/')) . '/';
+        if (!strstr($canonical, $identifier)) {
+            $canonical .= $identifier;
         }
 
         return $canonical;
