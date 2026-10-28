@@ -55,33 +55,35 @@ class YoastSeo extends Template
             '_use_rewrite' => true
         ]);
 
+        if (!$canonical) {
+            return $canonical;
+        }
+
+        // Path and query are handled separately: a "/" appended after the query string
+        // turns every canonical into a new URL (?p=2/ -> ?p=2%2F/ -> ...), a crawler trap.
+        $parts = explode('?', $canonical, 2);
+        $url = $parts[0];
+        $query = $parts[1] ?? '';
+
         $parameterStrip = $this->_scopeConfig->getValue(
             'yoastseo/general/strip_parameters_from_canonical',
             ScopeInterface::SCOPE_STORES
         );
 
-        if (
-            $canonical
-            && $parameterStrip == true
-            && strstr(substr($canonical, strrpos($canonical, '/')), '?') !== false
-        ) {
-            $canonical = substr($canonical, 0, strrpos($canonical, '/'));
+        if ($parameterStrip == true) {
+            $query = '';
         }
 
-        if (
-            $canonical
-            && substr($canonical, -5) !== '.html'
-            && substr($canonical, -1) !== '/'
-        ) {
-            $canonical .= '/';
+        if (substr($url, -5) !== '.html' && substr($url, -1) !== '/') {
+            $url .= '/';
         }
 
         $identifier = ($this->page->getIdentifier() ?? trim($this->_request->getOriginalPathInfo(), '/')) . '/';
-        if (!strstr($canonical, $identifier)) {
-            $canonical .= $identifier;
+        if (!strstr($url, $identifier)) {
+            $url .= $identifier;
         }
 
-        return $canonical;
+        return $query !== '' ? $url . '?' . $query : $url;
     }
 
     /**
